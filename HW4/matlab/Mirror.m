@@ -1,0 +1,14 @@
+function [Pe1,Pe2,Pu1,Pu2,Pv1,Pv2] = Mirror(xn,yn)
+sX = length(xn);
+sY = length(yn);
+iy = [1 2 sY-1 sY];
+jy = [5 4 sY-3 sY-4];
+ix = [1 2 sX-1 sX];
+jx = [5 4 sX-3 sX-4];
+d = ones(1,4);
+Pe1 = sparse([iy iy],[iy jy],[-d d],sY,sY) + speye(sY);
+Pe2 = (sparse([ix ix],[ix jx],[-d d],sX,sX) + speye(sX)).';
+Pu2 = (sparse([ix ix],[ix jx],[-d -d],sX,sX) + speye(sX)).';
+Pu1 = Pe1;
+Pv1 = sparse([iy iy],[iy jy],[-d -d],sY,sY) + speye(sY);
+Pv2 = Pe2;
